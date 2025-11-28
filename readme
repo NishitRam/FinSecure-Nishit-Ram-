@@ -1,1 +1,49 @@
-hh
+# FinSecure Loan Default Prediction
+
+## 📌 Project Overview
+**FinSecure** is a peer-to-peer lending company that connects borrowers with investors. This project aims to minimize financial losses by accurately predicting which loan applicants are likely to default. 
+
+Using historical loan application data, I have developed a machine learning model (Random Forest) to predict the probability of a loan being paid back in full.
+
+## 📂 Dataset
+The dataset `loan_data.csv` contains historical data on loan applicants.
+- **Target Variable**: `loan_paid_back` (1 = Paid Back, 0 = Default)
+- **Features**: Annual income, debt-to-income ratio, credit score, loan amount, interest rate, grade, employment status, etc.
+
+## 🛠️ Methodology
+
+### 1. Data Preprocessing
+- **Cleaning**: Removed non-predictive columns (`id`).
+- **Encoding**: Applied One-Hot Encoding to categorical variables (e.g., `loan_purpose`, `education_level`).
+- **Scaling**: Standardized numerical features (e.g., `annual_income`, `loan_amount`) using StandardScaler to ensure equal weightage.
+
+### 2. Model Selection
+- **Architecture**: Random Forest Classifier.
+- **Reasoning**: Chosen for its ability to handle non-linear relationships and interactions between features (like income vs. debt) and its robustness against overfitting compared to single decision trees.
+
+## 📊 Results
+
+The model was evaluated using the **Area Under the ROC Curve (AUC)** metric.
+
+- **Overall AUC Score**: **0.9076** (Outstanding predictive power)
+
+### Subgroup Analysis (Fairness Check)
+To ensure the model is fair, performance was tested across different demographics:
+
+| Segment | Category | AUC Score |
+| :--- | :--- | :--- |
+| **Education** | Bachelor's | 0.9081 |
+| | Master's | 0.9054 |
+| | High School | 0.9062 |
+| **Loan Purpose** | **Top Performing**: Education | 0.9196 |
+| | **Bottom Performing**: Car | 0.8971 |
+
+## 🚀 How to Run the Code
+
+### Prerequisites
+- Python 3.x
+- Libraries: `pandas`, `numpy`, `scikit-learn`, `matplotlib`
+
+### Installation
+```bash
+pip install pandas numpy scikit-learn matplotlib
